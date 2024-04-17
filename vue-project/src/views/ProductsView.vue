@@ -10,7 +10,7 @@ import DesciptionItem from "@/components/DesciptionItem.vue";
     </template>
     <template #heading>Products</template>
     <button @click="getProducts">Get Produtcs</button>
-    <button @click="getMoreProducts">Get More Produtcs</button>
+    <button @click="getMoreProducts" :disabled="countProductsOnPage == 20">Get More Produtcs</button>
     <div class="table-products">
       <div class="row-header">
         <div>N</div>
@@ -27,6 +27,7 @@ import DesciptionItem from "@/components/DesciptionItem.vue";
         <div><img class="product-photo" :src="`${product.image}`" /></div>
       </div>
     </div>
+    <button @click="getMoreProducts" :disabled="countProductsOnPage == 20">Get More Produtcs</button>
   </DesciptionItem>
 </template>
 
