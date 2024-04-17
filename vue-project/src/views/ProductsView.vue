@@ -1,6 +1,7 @@
 <script setup>
 import DocumentationIcon from "../components/icons/IconEcosystem.vue";
 import DesciptionItem from "@/components/DesciptionItem.vue";
+import axios from "axios";
 </script>
 
 <template>
@@ -33,11 +34,16 @@ import DesciptionItem from "@/components/DesciptionItem.vue";
 
 <script>
 export default {
+  mounted() {
+    this.fetchProductsData();
+  },
   data() {
     return {
       arrayProducts: [],
       countProductsOnPage: 10,
       allPtoducts: [],
+      arrayAllProducts: [],
+      isProductsLoading: false,
     };
   },
   methods: {
@@ -48,13 +54,29 @@ export default {
       this.countProductsOnPage += 5;
       this.fetchProductsData();
     },
-    fetchProductsData() {
+    
+
+    async fetchProductsData() {
+      try {
+        this.isProductsLoading = true;
+        const response = await axios.get("https://fakestoreapi.com/products?limit=" + this.countProductsOnPage)
+        this.arrayProducts = response.data;
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.isProductsLoading = false;
+      }
+
+    },
+
+    fetchAllProductsData() {
       fetch(
-        "https://fakestoreapi.com/products?limit=" + this.countProductsOnPage
+        "https://fakestoreapi.com/products"
       )
         .then((response) => response.json())
-        .then((json) => (this.arrayProducts = json));
+        .then((json) => (this.arrayAllProducts = json));
     },
+
   },
 };
 </script>
