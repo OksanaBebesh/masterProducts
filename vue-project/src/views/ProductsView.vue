@@ -9,7 +9,8 @@ import DesciptionItem from "@/components/DesciptionItem.vue";
       <DocumentationIcon />
     </template>
     <template #heading>Products</template>
-    <button @click="fetchData">Get Produtcs</button>
+    <button @click="getProducts">Get Produtcs</button>
+    <button @click="getMoreProducts">Get More Produtcs</button>
     <div class="table-products">
       <div class="row-header">
         <div>N</div>
@@ -34,12 +35,22 @@ export default {
   data() {
     return {
       arrayProducts: [],
+      countProductsOnPage: 10,
+      allPtoducts: [],
     };
   },
   methods: {
-    getProducts() {},
-    fetchData() {
-      fetch("https://fakestoreapi.com/products?limit=10")
+    getProducts() {
+      this.fetchProductsData();
+    },
+    getMoreProducts() {
+      this.countProductsOnPage += 5;
+      this.fetchProductsData();
+    },
+    fetchProductsData() {
+      fetch(
+        "https://fakestoreapi.com/products?limit=" + this.countProductsOnPage
+      )
         .then((response) => response.json())
         .then((json) => (this.arrayProducts = json));
     },
