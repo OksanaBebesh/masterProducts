@@ -5,11 +5,12 @@ import { RouterLink, RouterView } from "vue-router";
 <template>
   <header>
     <div class="wrapper">
-      <h1>Products Masters</h1>
-
+      <h1>Learning Vue js</h1>
       <nav>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/products">Products</RouterLink>
+        <RouterLink to="/customers">Customers</RouterLink>
+        <RouterLink to="/customers/add">Add Customers</RouterLink>
       </nav>
     </div>
   </header>
@@ -28,6 +29,8 @@ nav {
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 nav a.router-link-exact-active {
