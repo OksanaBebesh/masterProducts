@@ -1,5 +1,5 @@
 <script setup>
-import DocumentationIcon from "../components/icons/IconEcosystem.vue";
+import DocumentationIcon from "@/components/icons/IconEcosystem.vue";
 import DesciptionItem from "@/components/DesciptionItem.vue";
 import axios from "axios";
 </script>
