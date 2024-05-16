@@ -1,9 +1,10 @@
 <script setup>
-  import DocumentationIcon from "@/components/icons/IconEcosystem.vue"
-  import DesciptionItem from "@/components/DesciptionItem.vue"
+  import DocumentationIcon from "@/components/icons/IconEcosystem.vue";
+  import DesciptionItem from "@/components/DesciptionItem.vue";
+  import ButtonInfo from "@/components/UI/Buttons/ButtonInfo.vue";
+  import ButtonSuccess from "@/components/UI/Buttons/ButtonSuccess.vue";
   import router from "@/router";
-  import axios from "axios"
-
+  import axios from "axios";
 </script>
 
 <template>
@@ -13,21 +14,21 @@
     </template>
        
     <template #heading>Customers</template>
-    <button type="button" class="btn btn-info" @click="addCustomerFormShow">Add Customer</button>
-    <div class="table-customers" >      
-      <div class="row-header table">
-        <div class="id-column">#</div>       
-        <div>name</div>
-        <div>email</div>
-        <div>actions</div>
-      </div>
-      <div class="row-customer" v-for="customer in arrayCustomers">
-        <div class="id-column">{{ customer.id }}</div>
-        <div>{{ customer.name }}</div>
-        <div>{{ customer.email }}</div>
-        <div><button type="button" class="btn btn-success"  @click="editCustomerFormShow(customer.id)">Edit Customer</button></div>
-      </div>
-    </div>
+    <ButtonInfo @click="addCustomerFormShow">Add Customer</ButtonInfo>
+        <div class="table-customers" >      
+          <div class="row-header table">
+            <div class="id-column">#</div>       
+            <div>name</div>
+            <div>email</div>
+            <div>actions</div>
+          </div>
+          <div class="row-customer" v-for="customer in arrayCustomers">
+            <div class="id-column">{{ customer.id }}</div>
+            <div>{{ customer.name }}</div>
+            <div>{{ customer.email }}</div>
+            <div><ButtonSuccess  @click="editCustomerFormShow(customer.id)">Edit Customer</ButtonSuccess></div>
+          </div>
+        </div>
   </DesciptionItem>
 </template>
 
