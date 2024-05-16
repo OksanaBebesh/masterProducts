@@ -12,22 +12,28 @@ const router = createRouter({
     {
       path: "/about",
       name: "about",
-      component: () => import("../views/AboutView.vue"),
+      component: () => import("@/views/AboutView.vue"),
     },
     {
       path: "/products",
       name: "products",
-      component: () => import("../views/ProductsView.vue"),
+      component: () => import("@/views/Product/ProductsView.vue"),
     },
     {
       path: "/customers",
       name: "customers",
-      component: () => import("../views/CustomersView.vue"),
+      component: () => import("@/views/Customer/CustomersView.vue"),
     },
     {
       path: "/customers/add",
       name: "customersAdd",
-      component: () => import("@/components/CustomersAddForm.vue"),
+      component: () => import("@/components/Customer/CustomersAddForm.vue"),
+    },
+    {
+      path: "/customers/edit/:id",
+      name: "customerEdit",
+      component: () => import("@/components/Customer/CustomersEditForm.vue"),
+      params: true
     }
   ],
 });

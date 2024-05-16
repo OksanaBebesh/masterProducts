@@ -1,15 +1,19 @@
 <script setup>
-  import axios from "axios"
+  import axios from "axios";
+  import router from "@/router";
+  import ButtonSuccess from "@/components/UI/Buttons/ButtonSuccess.vue";
+  import ButtonCancel from "@/components/UI/Buttons/ButtonCancel.vue";
+  import Input from "@/components/UI/Input/Input.vue";
 </script>
 
 <template>
     <div class="form customer-add">
         <h2>Add new Customer</h2>
-        <input type="text" v-model="customerName" placeholder="Customer Name"  />
-        <input type="email" v-model="customerEmail" placeholder="Customer Email" />
+        <Input v-model="customer.name" placeholder="Customer Name"  />
+        <Input v-model="customer.email" placeholder="Customer Email" />
         <div class="btn-lines">
-            <button class="btn btn-success" @click="addCustomers">Save</button>
-            <button class="btn btn-danger" @click="replaceToMainCustomerPage">Cancel</button>
+            <ButtonSuccess @click="addCustomers">Save</ButtonSuccess>
+            <ButtonCancel @click="replaceToMainCustomerPage">Cancel</ButtonCancel>
         </div>
     </div>
 </template>
@@ -19,20 +23,16 @@ export default {
     data(){
         return {
             customer: {name: "", email: ""},
-            customerName: "",
-            customerEmail: "",
             customersPOSTUrl: "http://localhost:8000/api/customers"
         }
     },
     methods: {
         replaceToMainCustomerPage() {
-            window.location.href = ("/customers");
-        },        
+            router.push("/customers");
+        },
+        
         async addCustomers() {
             try {
-                this.customer.name = this.customerName;
-                this.customer.email = this.customerEmail;
-
                 await axios.post(this.customersPOSTUrl, this.customer);
             } 
             catch(e) 
@@ -43,9 +43,6 @@ export default {
                 this.replaceToMainCustomerPage();
             }
         },
-        cancel() {
-            this.replaceToMainCustomerPage();
-        }
     }
 }
 </script>
@@ -55,11 +52,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 10px;
-}
-
-.form input {
-    padding: 10px;
-    margin: 10px;
 }
 
 .btn-lines {
