@@ -7,10 +7,12 @@ import { RouterLink, RouterView } from "vue-router";
     <div class="wrapper">
       <h1>Learning Vue js</h1>
       <nav>
+        <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/products">Products</RouterLink>
         <RouterLink to="/customers">Customers</RouterLink>
         <RouterLink to="/customers/add">Add Customers</RouterLink>
+        <RouterLink to="/customers/edit/:id">Edit Customers</RouterLink>
       </nav>
     </div>
   </header>

@@ -1,5 +1,5 @@
 <script setup>
-  import DocumentationIcon from "../components/icons/IconEcosystem.vue"
+  import DocumentationIcon from "@/components/icons/IconEcosystem.vue"
   import DesciptionItem from "@/components/DesciptionItem.vue"
   import router from "@/router";
   import axios from "axios"
@@ -19,11 +19,13 @@
         <div class="id-column">#</div>       
         <div>name</div>
         <div>email</div>
+        <div>actions</div>
       </div>
       <div class="row-customer" v-for="customer in arrayCustomers">
         <div class="id-column">{{ customer.id }}</div>
         <div>{{ customer.name }}</div>
         <div>{{ customer.email }}</div>
+        <div><button type="button" class="btn btn-success"  @click="editCustomerFormShow(customer.id)">Edit Customer</button></div>
       </div>
     </div>
   </DesciptionItem>
@@ -61,6 +63,9 @@ export default {
     },
     addCustomerFormShow() {
       router.push("customers/add")
+    },
+    editCustomerFormShow(customerId) {
+      router.push({ path: `customers/edit/${customerId}` })
     }
   },
 };
