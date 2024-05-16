@@ -73,6 +73,11 @@ export default {
     padding: 10px;
 }
 
+.form input {
+        padding: 10px;
+        margin: 10px;
+    }
+
 .btn-lines {
     display: flex;
     justify-content: space-between;
