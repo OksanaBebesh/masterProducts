@@ -1,5 +1,6 @@
 <script setup>
-  import axios from "axios"
+  import axios from "axios";
+  import router from "@/router";
 </script>
 
 <template>
@@ -24,8 +25,9 @@ export default {
     },
     methods: {
         replaceToMainCustomerPage() {
-            window.location.href = ("/customers");
-        },        
+            router.push("/customers");
+        },
+        
         async addCustomers() {
             try {
                 await axios.post(this.customersPOSTUrl, this.customer);
@@ -38,9 +40,6 @@ export default {
                 this.replaceToMainCustomerPage();
             }
         },
-        cancel() {
-            this.replaceToMainCustomerPage();
-        }
     }
 }
 </script>

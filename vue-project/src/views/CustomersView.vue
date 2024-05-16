@@ -1,6 +1,7 @@
 <script setup>
   import DocumentationIcon from "../components/icons/IconEcosystem.vue"
   import DesciptionItem from "@/components/DesciptionItem.vue"
+  import router from "@/router";
   import axios from "axios"
 
 </script>
@@ -36,7 +37,6 @@ export default {
       arrayCustomers: [],
       isCustomersLoading: false,
       customersGetUrl: "http://localhost:8000/api/customers",
-      customersPOSTUrl: "http://localhost:8000/api/customers",
     };
   },
   mounted() {
@@ -51,7 +51,7 @@ export default {
     async fetchCustomers() {
       try {
         this.isCustomersLoading = true;
-        const response = await axios.get("http://localhost:8000/api/customers");
+        const response = await axios.get(this.customersGetUrl);
         this.arrayCustomers = response.data;
       } catch (e) {
         console.error(e);
@@ -60,62 +60,61 @@ export default {
       }
     },
     addCustomerFormShow() {
-      window.location.replace("customers/add");
+      router.push("customers/add")
     }
-
   },
 };
 </script>
 
 <style>
-.table-customers {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 43rem;
-}
+  .table-customers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 43rem;
+  }
 
-.row-header,
-.row-customer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+  .row-header,
+  .row-customer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-.row-customer {
-  padding: 15px;
-  border: 1px solid rgb(174, 169, 169);
-  border-radius: 5px;
-  margin-bottom: 2px;
-}
+  .row-customer {
+    padding: 15px;
+    border: 1px solid rgb(174, 169, 169);
+    border-radius: 5px;
+    margin-bottom: 2px;
+  }
 
-.row-customer:hover {
-  cursor: pointer;
-  border: 2px solid rgb(61, 134, 75);
-}
+  .row-customer:hover {
+    cursor: pointer;
+    border: 2px solid rgb(61, 134, 75);
+  }
 
-.row-customer div {
-  width: fit-content;
-  padding: 10px;
-}
+  .row-customer div {
+    width: fit-content;
+    padding: 10px;
+  }
 
-.btn-line {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
+  .btn-line {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
 
-.row-header {
-  border-bottom: 1px solid black;
-}
+  .row-header {
+    border-bottom: 1px solid black;
+  }
 
-.row-header div {
-  font-weight: 500;
-}
+  .row-header div {
+    font-weight: 500;
+  }
 
-.id-column {
-  width: 25px;
-  width: fit-content;
-}
+  .id-column {
+    width: 25px;
+    width: fit-content;
+  }
 </style>
