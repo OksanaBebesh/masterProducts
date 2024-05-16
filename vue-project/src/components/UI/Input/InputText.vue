@@ -1,7 +1,5 @@
 <template>
-    <input type="text" class="form-input" >
-        <slot></slot>
-    </input>
+    <input type="text" class="form-input" >        
 </template>
 
 <style >

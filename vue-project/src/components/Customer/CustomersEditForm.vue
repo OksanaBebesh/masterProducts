@@ -4,14 +4,14 @@
   import { useRoute } from 'vue-router';
   import ButtonCancel from "@/components/UI/Buttons/ButtonCancel.vue";
   import ButtonSuccess from "@/components/UI/Buttons/ButtonSuccess.vue";
-  import Input from "@/components/UI/Input/Input.vue"
+  import InputText from "@/components/UI/Input/InputText.vue"
 </script>
 
 <template>
     <div class="form customer-add">
         <h2>Edit Customer</h2>
-        <Input v-model="customer.name" placeholder="Customer Name"  />
-        <Input v-model="customer.email" placeholder="Customer Email" />
+        <input type="text" v-model="customer.name" placeholder="Customer Name"  />
+        <input type="text" v-model="customer.email" placeholder="Customer Email" />
         <div class="btn-lines">
             <ButtonSuccess @click="updateCustomers">Save</ButtonSuccess>
             <ButtonCancel @click="replaceToMainCustomerPage">Cancel</ButtonCancel>
@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .form {
     display: flex;
     flex-direction: column;
