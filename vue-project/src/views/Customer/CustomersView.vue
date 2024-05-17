@@ -3,6 +3,7 @@
   import DesciptionItem from "@/components/DesciptionItem.vue";
   import ButtonInfo from "@/components/UI/Buttons/ButtonInfo.vue";
   import ButtonSuccess from "@/components/UI/Buttons/ButtonSuccess.vue";
+  import ButtonCancel from "@/components/UI/Buttons/ButtonCancel.vue";
   import router from "@/router";
   import axios from "axios";
 </script>
@@ -26,10 +27,19 @@
             <div class="id-column">{{ customer.id }}</div>
             <div>{{ customer.name }}</div>
             <div>{{ customer.email }}</div>
-            <div><ButtonSuccess  @click="editCustomerFormShow(customer.id)">Edit Customer</ButtonSuccess></div>
+            <div>
+                  <ButtonSuccess  
+                    @click="editCustomerFormShow(customer.id)">
+                    Edit Customer
+                  </ButtonSuccess>
+                  <ButtonCancel
+                    @click="removeCustomer(customer.id)"
+                  >X</ButtonCancel>
+            </div>
           </div>
         </div>
   </DesciptionItem>
+
 </template>
 
 <script>
@@ -39,7 +49,7 @@ export default {
     return {
       arrayCustomers: [],
       isCustomersLoading: false,
-      customersGetUrl: "http://localhost:8000/api/customers",
+      url: "http://localhost:8000/api/customers",
     };
   },
   mounted() {
@@ -54,7 +64,7 @@ export default {
     async fetchCustomers() {
       try {
         this.isCustomersLoading = true;
-        const response = await axios.get(this.customersGetUrl);
+        const response = await axios.get(this.url);
         this.arrayCustomers = response.data;
       } catch (e) {
         console.error(e);
@@ -66,7 +76,18 @@ export default {
       router.push("customers/add")
     },
     editCustomerFormShow(customerId) {
-      router.push({ path: `customers/edit/${customerId}` })
+      router.push({ path: `customers/edit/${customerId}` });
+    },
+    async removeCustomer(customerId) {
+      try {
+        await axios.delete(this.url + "/" + customerId);
+      }
+      catch (e) {
+        console.error(e.message)
+      }
+      finally {
+        this.fetchCustomers();
+      }
     }
   },
 };
