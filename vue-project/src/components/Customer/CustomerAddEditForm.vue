@@ -4,13 +4,12 @@
   import { useRoute } from 'vue-router';
   import ButtonSuccess from "@/components/UI/Buttons/ButtonSuccess.vue";
   import ButtonCancel from "@/components/UI/Buttons/ButtonCancel.vue";
-  import InputText from "@/components/UI/Input/InputText.vue";
 </script>
 <template>
     <div>
         <form class="form customer-add">
             <h2 v-if="edit">Update Customer</h2>
-            <h2  v-else>Add new Customer</h2>
+            <h2 v-else>Add new Customer</h2>
             <input v-model="customer.name" placeholder="Customer Name"  />
             <input v-model="customer.email" placeholder="Customer Email" />
             <div class="btn-lines">
@@ -48,10 +47,10 @@ export default {
         },
         async getEditCustomer(customerId) {
             try {   
-                    let urlGetCustomerById = this.url + customerId + "/edit"; 
-                    let response = await axios.get(urlGetCustomerById);              
-                    this.customer.name = response.data.name;
-                    this.customer.email = response.data.email;
+                let urlGetCustomerById = this.url + customerId + "/edit"; 
+                let response = await axios.get(urlGetCustomerById);              
+                this.customer.name = response.data.name;
+                this.customer.email = response.data.email;
             } 
             catch(e) 
             {
@@ -86,6 +85,3 @@ export default {
     }
 }
 </script>
-<style>
-    
-</style>
