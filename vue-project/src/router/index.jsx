@@ -27,12 +27,12 @@ const router = createRouter({
     {
       path: "/customers/add",
       name: "customersAdd",
-      component: () => import("@/components/Customer/CustomersAddForm.vue"),
+      component: () => import("@/components/Customer/CustomerAddEditForm.vue"),
     },
     {
       path: "/customers/edit/:id",
       name: "customerEdit",
-      component: () => import("@/components/Customer/CustomersEditForm.vue"),
+      component: () => import("@/components/Customer/CustomerAddEditForm.vue"),
       params: true
     }
   ],
