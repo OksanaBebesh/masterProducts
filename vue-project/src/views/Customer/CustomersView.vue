@@ -6,10 +6,12 @@
   import ButtonCancel from "@/components/UI/Buttons/ButtonCancel.vue";
   import router from "@/router";
   import axios from "axios";
+  import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
+  
 </script>
 
 <template>
-  <DesciptionItem>
+    <DesciptionItem>
     <template #icon>
       <DocumentationIcon />
     </template>
@@ -45,33 +47,39 @@
 <script>
 
 export default {
-  data() {
-    return {
-      arrayCustomers: [],
-      isCustomersLoading: false,
-      url: "http://localhost:8000/api/customers",
-    };
-  },
   mounted() {
     this.fetchCustomers();
   },
   computed: {
-    customersFromStore() {
-      return this.$store.state.customers;
-    },
+    ...mapState({
+      arrayCustomers: state => state.customer.customers,
+      isCustomersLoading: state => state.customer.isCustomersLoading,
+      url: state => state.customer.url,
+      test: state => state.customer.test
+    }),
+    ...mapGetters({
+      getCustomers: 'customer/getCustomers'
+    }),
   },
   methods: {
-    async fetchCustomers() {
-      try {
-        this.isCustomersLoading = true;
-        const response = await axios.get(this.url);
-        this.arrayCustomers = response.data;
-      } catch (e) {
-        console.error(e);
-      } finally {
-        this.isCustomersLoading = false;
-      }
-    },
+    ...mapMutations({
+      setCustomers: 'customer/setCustomers',
+      setLoading: 'customer/setLoading'
+    }),
+    ...mapActions({
+      fetchCustomers: 'customer/fetchCustomers'
+    }),
+    // async fetchCustomers() {
+    //   try {
+    //     this.isCustomersLoading = true;
+    //     const response = await axios.get(this.url);
+    //     this.arrayCustomers = response.data;
+    //   } catch (e) {
+    //     console.error(e);
+    //   } finally {
+    //     this.isCustomersLoading = false;
+    //   }
+    // },
     addCustomerFormShow() {
       router.push("customers/add")
     },
