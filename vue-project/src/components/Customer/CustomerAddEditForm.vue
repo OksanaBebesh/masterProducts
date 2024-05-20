@@ -10,8 +10,10 @@
         <form class="form customer-add">
             <h2 v-if="edit">Update Customer</h2>
             <h2 v-else>Add new Customer</h2>
-            <input v-model="customer.name" placeholder="Customer Name"  />
-            <input v-model="customer.email" placeholder="Customer Email" />
+            <div class="input-line">
+                <input v-model="customer.name" placeholder="Customer Name"  />
+                <input v-model="customer.email" placeholder="Customer Email" />
+            </div>
             <div class="btn-lines">
                 <ButtonSuccess v-if="edit" @click="updateCustomers">Update</ButtonSuccess>
                 <ButtonSuccess v-else @click="addCustomers">Save</ButtonSuccess>
@@ -24,7 +26,6 @@
 export default {
     data(){
         return {
-            modal: "",
             customer: {name: "", email: ""},
             url: "http://localhost:8000/api/customers/",
             customerId: useRoute().params.id,
@@ -34,9 +35,8 @@ export default {
     mounted() {
         const route = useRoute();
         const customerId = route.params.id;
-        this.modal = (route.params.id)? "edit" : "add";
 
-        if (this.modal === "edit") {
+        if (route.params.id) {
            this.edit = true;
            this.getEditCustomer(customerId);
         }
@@ -85,3 +85,15 @@ export default {
     }
 }
 </script>
+
+<style>
+ form input {
+    padding: 10px;
+    margin: 10px;
+ }
+
+ .input-line {
+    display: flex;
+    flex-direction: column;
+ }
+</style>
