@@ -18,6 +18,7 @@
        
     <template #heading>Customers</template>
     <ButtonInfo @click="addCustomerFormShow">Add Customer</ButtonInfo>
+    <h1>{{ test }}</h1>
         <div class="table-customers" >      
           <div class="row-header table">
             <div class="id-column">#</div>       
